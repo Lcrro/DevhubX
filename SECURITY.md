@@ -8,7 +8,7 @@
 
 请不要在公开 Issue 中发布可利用的漏洞细节、会话令牌或用户日志。
 
-仓库公开后，请通过 GitHub 的 **Security → Advisories → Report a vulnerability** 私密报告。仓库维护者需先启用 Private vulnerability reporting。若入口不可用，请创建不包含细节的 Issue，请求维护者提供私密联系渠道；在得到渠道前不要上传利用代码或敏感文件。
+请通过仓库 [github.com/Lcrro/DevhubX](https://github.com/Lcrro/DevhubX) 的 **Security → Advisories → Report a vulnerability** 私密报告。仓库维护者需先启用 Private vulnerability reporting。若入口不可用，请创建不包含细节的 Issue，请求维护者提供私密联系渠道；在得到渠道前不要上传利用代码或敏感文件。
 
 报告请说明版本、操作系统、复现步骤、影响及建议修复方式。维护者确认修复之前，请协调披露时间。本仓库尚未配置具体维护者邮箱，不提供虚构联系方式。
 

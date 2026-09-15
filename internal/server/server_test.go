@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"devhub/internal/model"
+	"github.com/Lcrro/DevhubX/internal/model"
 )
 
 func TestLoopbackOnly(t *testing.T) {

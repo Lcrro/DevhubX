@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"devhub/internal/model"
+	"github.com/Lcrro/DevhubX/internal/model"
 )
 
 const (

@@ -7,7 +7,7 @@ import (
 
 	_ "modernc.org/sqlite"
 
-	"devhub/internal/model"
+	"github.com/Lcrro/DevhubX/internal/model"
 )
 
 func TestPersistenceAndLogRetention(t *testing.T) {

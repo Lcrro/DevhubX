@@ -22,12 +22,12 @@ import (
 
 	"github.com/shirou/gopsutil/v4/process"
 
-	"devhub/internal/cover"
-	"devhub/internal/discovery"
-	"devhub/internal/launchcmd"
-	"devhub/internal/model"
-	"devhub/internal/runner"
-	"devhub/internal/store"
+	"github.com/Lcrro/DevhubX/internal/cover"
+	"github.com/Lcrro/DevhubX/internal/discovery"
+	"github.com/Lcrro/DevhubX/internal/launchcmd"
+	"github.com/Lcrro/DevhubX/internal/model"
+	"github.com/Lcrro/DevhubX/internal/runner"
+	"github.com/Lcrro/DevhubX/internal/store"
 )
 
 type Server struct {

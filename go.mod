@@ -1,4 +1,4 @@
-module devhub
+module github.com/Lcrro/DevhubX
 
 go 1.26.0
 

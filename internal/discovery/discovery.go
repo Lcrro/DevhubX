@@ -14,7 +14,7 @@ import (
 	gnet "github.com/shirou/gopsutil/v4/net"
 	"github.com/shirou/gopsutil/v4/process"
 
-	"devhub/internal/model"
+	"github.com/Lcrro/DevhubX/internal/model"
 )
 
 // ManagedInstallPath reports directories owned by the operating system's app

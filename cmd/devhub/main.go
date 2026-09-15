@@ -14,8 +14,8 @@ import (
 	"syscall"
 	"time"
 
-	"devhub/internal/server"
-	"devhub/web"
+	"github.com/Lcrro/DevhubX/internal/server"
+	"github.com/Lcrro/DevhubX/web"
 )
 
 func main() {

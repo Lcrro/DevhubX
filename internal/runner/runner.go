@@ -12,9 +12,9 @@ import (
 
 	"github.com/shirou/gopsutil/v4/process"
 
-	"devhub/internal/logfmt"
-	"devhub/internal/model"
-	"devhub/internal/store"
+	"github.com/Lcrro/DevhubX/internal/logfmt"
+	"github.com/Lcrro/DevhubX/internal/model"
+	"github.com/Lcrro/DevhubX/internal/store"
 )
 
 type running struct {

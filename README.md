@@ -1,8 +1,10 @@
 # DevHub
 
+仓库：[github.com/Lcrro/DevhubX](https://github.com/Lcrro/DevhubX) · 当前版本 **0.2.0**
+
 一个只在本机运行的开发服务工作台。用 **Go + React / TypeScript + SQLite** 把项目目录、端口、启动命令、进程状态、日志和网页封面放在一起。
 
-项目目标、开发路线、进展、技术栈和环境见 [`docs/project-overview.md`](docs/project-overview.md)。
+项目目标、开发路线、进展、技术栈和环境见 [`docs/project-overview.md`](docs/project-overview.md)。 Issue 和 Pull Request 请提到本仓库。
 
 不需要账号、云服务或数据库服务器。前端打包到 Go 可执行文件中，启动后访问 **http://127.0.0.1:4780**。
 
@@ -24,6 +26,8 @@
 构建需要 **Go 1.26+、Node.js 22.12+、npm**。建议使用当前 Go 稳定版与 Node.js LTS。正常使用编译好的程序不需要 Node.js 或 Go；被管理的项目仍需要自己的运行时。
 
 ```sh
+git clone https://github.com/Lcrro/DevhubX.git
+cd DevhubX
 cd web
 npm ci
 npm run build

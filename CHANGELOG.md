@@ -1,6 +1,8 @@
 # Changelog
 
-## 0.2.0 - 2026-09-14
+源码：[github.com/Lcrro/DevhubX](https://github.com/Lcrro/DevhubX)
+
+## 0.2.0 - 2026-09-15
 
 ### Added
 - Settings for language, auto-scan interval, and include/exclude discovery rules.

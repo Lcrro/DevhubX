@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"testing"
 
-	"devhub/internal/model"
+	"github.com/Lcrro/DevhubX/internal/model"
 )
 
 func TestDecideIncludeExclude(t *testing.T) {

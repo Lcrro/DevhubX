@@ -1,6 +1,6 @@
 # Contributing to DevHub
 
-欢迎修复问题、改善跨平台兼容性和交互体验。较大的功能调整请先创建 Issue 讨论使用场景。
+源码仓库：[github.com/Lcrro/DevhubX](https://github.com/Lcrro/DevhubX)。欢迎修复问题、改善跨平台兼容性和交互体验。较大的功能调整请先在该仓库创建 Issue 讨论使用场景。
 
 ## 本地准备
 

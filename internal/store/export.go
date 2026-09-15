@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"devhub/internal/model"
+	"github.com/Lcrro/DevhubX/internal/model"
 )
 
 type Bundle struct {

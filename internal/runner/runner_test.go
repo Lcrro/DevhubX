@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"devhub/internal/model"
-	"devhub/internal/store"
+	"github.com/Lcrro/DevhubX/internal/model"
+	"github.com/Lcrro/DevhubX/internal/store"
 )
 
 func TestHelperServer(t *testing.T) {

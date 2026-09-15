@@ -7,7 +7,7 @@ import (
 
 	_ "modernc.org/sqlite"
 
-	"devhub/internal/model"
+	"github.com/Lcrro/DevhubX/internal/model"
 )
 
 type Store struct{ db *sql.DB }
