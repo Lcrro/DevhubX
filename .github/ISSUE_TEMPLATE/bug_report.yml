@@ -1,0 +1,28 @@
+name: Bug report
+description: 报告可复现的问题
+title: '[Bug] '
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境
+      description: DevHub 版本、操作系统、Go/Node 版本（如从源码运行）
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为与实际行为
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志或截图
+      description: 请先移除密钥、个人路径和敏感项目内容。安全漏洞请私密报告。

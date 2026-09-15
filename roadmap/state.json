@@ -1,0 +1,814 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "name": "DevHub",
+    "shortName": "DH",
+    "context": "Local development service control room",
+    "eyebrow": "FROM LOCAL MVP TO MATURE OPEN SOURCE",
+    "headline": "让每个项目都能被发现、启动、理解和可靠恢复。",
+    "versionLabel": "v0.2 功能已验收 · 发布门禁待 macOS 与 GitHub Release"
+  },
+  "updatedAt": "2026-09-14T08:58:00.000Z",
+  "defaultPort": 4319,
+  "canvas": {
+    "width": 1460,
+    "height": 1760
+  },
+  "stages": [
+    {
+      "id": "foundation",
+      "title": "FOUNDATION · 边界与可信基础",
+      "subtitle": "范围、安全模型与持久化事实",
+      "y": 0
+    },
+    {
+      "id": "current",
+      "title": "V0.1 · 本地服务闭环",
+      "subtitle": "发现、启动、观察与网页封面",
+      "y": 300
+    },
+    {
+      "id": "maturity",
+      "title": "V0.2 · 成熟日常体验",
+      "subtitle": "设置、健康、可控发现和个性化",
+      "y": 690
+    },
+    {
+      "id": "release",
+      "title": "RELEASE · 跨平台与开源交付",
+      "subtitle": "真实平台证据、安装升级和发布门禁",
+      "y": 1110
+    },
+    {
+      "id": "future",
+      "title": "NEXT · 可选扩展",
+      "subtitle": "首个成熟版本之后重新评估",
+      "y": 1480
+    }
+  ],
+  "documents": [
+    {
+      "label": "项目说明",
+      "path": "README.md"
+    },
+    {
+      "label": "安全模型",
+      "path": "SECURITY.md"
+    },
+    {
+      "label": "贡献指南",
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "label": "v0.1 验证记录",
+      "path": "docs/devhub-v0.1-verification.md"
+    },
+    {
+      "label": "正式验收",
+      "path": "docs/roadmap-acceptance.md"
+    },
+    {
+      "label": "v0.2 设置验证",
+      "path": "docs/devhub-v0.2-settings.md"
+    },
+    {
+      "label": "v0.2 健康与日志开发记录",
+      "path": "docs/devhub-v0.2-health-logs.md"
+    },
+    {
+      "label": "v0.2 可控发现开发记录",
+      "path": "docs/devhub-v0.2-discovery-controls.md"
+    },
+    {
+      "label": "项目总览",
+      "path": "docs/project-overview.md"
+    },
+    {
+      "label": "v0.2 配置迁移验证",
+      "path": "docs/devhub-v0.2-portability.md"
+    },
+    {
+      "label": "v0.2 个性化 UI 验证",
+      "path": "docs/devhub-v0.2-personalized-ui.md"
+    },
+    {
+      "label": "跨平台运行记录",
+      "path": "docs/devhub-cross-platform.md"
+    },
+    {
+      "label": "安装与发布准备",
+      "path": "docs/devhub-distribution.md"
+    },
+    {
+      "label": "变更记录",
+      "path": "CHANGELOG.md"
+    }
+  ],
+  "acceptance": {
+    "file": "docs/roadmap-acceptance.md",
+    "requireCoverage": true
+  },
+  "nodes": [
+    {
+      "id": "scope",
+      "title": "范围与验收基线",
+      "subtitle": "本机工具 · 可信用户 · 开源边界",
+      "stage": "foundation",
+      "x": 150,
+      "y": 45,
+      "deps": [],
+      "checks": [
+        {
+          "text": "核心用途、数据边界和已知限制写入 README",
+          "done": true
+        },
+        {
+          "text": "正式验收与开发检查点独立记录",
+          "done": true
+        },
+        {
+          "text": "v0.2 与未来能力分开统计",
+          "done": true
+        }
+      ],
+      "ac": [],
+      "status": "done",
+      "description": "DevHub 面向同一台电脑上的可信开发者，统一管理本机开发服务；代码、测试和验证记录是事实来源，路线图只反映保存后的证据结论。",
+      "evidence": [
+        "README.md",
+        "SECURITY.md",
+        "docs/roadmap-acceptance.md"
+      ]
+    },
+    {
+      "id": "local-security",
+      "title": "本机安全边界",
+      "subtitle": "Loopback · 会话令牌 · 请求校验",
+      "stage": "foundation",
+      "x": 520,
+      "y": 45,
+      "deps": [
+        "scope"
+      ],
+      "checks": [
+        {
+          "text": "监听地址强制为 127.0.0.1",
+          "done": true
+        },
+        {
+          "text": "写操作校验 Host、Origin 与会话令牌",
+          "done": true
+        },
+        {
+          "text": "外部进程停止前核对用户、PID 与创建时间",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-006",
+        "AC-007"
+      ],
+      "status": "done",
+      "description": "管理接口不面向局域网或公网；安全目标是抵御浏览器跨站操控与误停其他用户进程，不提供恶意同用户进程隔离。",
+      "evidence": [
+        "SECURITY.md",
+        "internal/server/server_test.go",
+        "internal/server/server.go"
+      ]
+    },
+    {
+      "id": "persistence",
+      "title": "SQLite 持久化",
+      "subtitle": "配置 · 日志 · 封面引用",
+      "stage": "foundation",
+      "x": 890,
+      "y": 45,
+      "deps": [
+        "scope"
+      ],
+      "checks": [
+        {
+          "text": "服务配置在重启后恢复",
+          "done": true
+        },
+        {
+          "text": "日志保留与增量读取有测试",
+          "done": true
+        },
+        {
+          "text": "SQLite 使用 WAL 和参数化语句",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-005"
+      ],
+      "status": "done",
+      "description": "本机 SQLite 保存服务配置和有限日志，PNG 封面保存在私有数据目录；数据库升级迁移仍属于后续发布工作。",
+      "evidence": [
+        "internal/store/store.go",
+        "internal/store/store_test.go",
+        "docs/devhub-v0.1-verification.md"
+      ]
+    },
+    {
+      "id": "process-lifecycle",
+      "title": "统一启动与停止",
+      "subtitle": "端口冲突 · 进程树 · 生命周期",
+      "stage": "current",
+      "x": 45,
+      "y": 365,
+      "deps": [
+        "scope",
+        "persistence"
+      ],
+      "checks": [
+        {
+          "text": "保存命令并从项目目录启动",
+          "done": true
+        },
+        {
+          "text": "启动前拒绝端口冲突",
+          "done": true
+        },
+        {
+          "text": "Windows Job Object 和 Unix 进程组可清理子进程",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-001",
+        "AC-002"
+      ],
+      "status": "done",
+      "description": "DevHub 启动的服务归当前会话管理，停止时处理整个托管进程树；外部服务保持独立并要求显式确认。",
+      "evidence": [
+        "internal/runner/runner.go",
+        "internal/runner/runner_test.go",
+        "docs/devhub-v0.1-verification.md"
+      ]
+    },
+    {
+      "id": "service-discovery",
+      "title": "服务发现与项目识别",
+      "subtitle": "监听端口 · 工作目录 · 排除应用",
+      "stage": "current",
+      "x": 325,
+      "y": 365,
+      "deps": [
+        "scope"
+      ],
+      "checks": [
+        {
+          "text": "当前用户的开发监听进程可自动发现",
+          "done": true
+        },
+        {
+          "text": "常见项目标记可识别框架和项目目录",
+          "done": true
+        },
+        {
+          "text": "系统应用安装目录不会误识别为开发项目",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-003",
+        "AC-004"
+      ],
+      "status": "done",
+      "description": "扫描 TCP 监听进程并向上识别项目；已针对 QQ NT 多端口误判加入系统应用目录排除。容器、WSL 与自定义规则仍待增强。",
+      "evidence": [
+        "internal/discovery/discovery.go",
+        "internal/discovery/discovery_test.go"
+      ]
+    },
+    {
+      "id": "status-and-logs",
+      "title": "状态与实时日志",
+      "subtitle": "运行状态 · 增量输出 · 失败可见",
+      "stage": "current",
+      "x": 605,
+      "y": 365,
+      "deps": [
+        "process-lifecycle",
+        "persistence"
+      ],
+      "checks": [
+        {
+          "text": "区分托管、启动中、外部运行与停止",
+          "done": true
+        },
+        {
+          "text": "stdout/stderr 可在页面增量查看",
+          "done": true
+        },
+        {
+          "text": "日志数量和单条大小受限",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-001",
+        "AC-005"
+      ],
+      "status": "done",
+      "description": "当前状态以进程身份和端口为主；HTTP 健康与 PowerShell CLIXML/编码清理将在 v0.2 单独完成。",
+      "evidence": [
+        "internal/store/store.go",
+        "web/src/App.tsx",
+        "docs/devhub-v0.1-verification.md"
+      ]
+    },
+    {
+      "id": "web-covers",
+      "title": "本机网页封面",
+      "subtitle": "隔离浏览器 · 自动队列 · 手动刷新",
+      "stage": "current",
+      "x": 885,
+      "y": 365,
+      "deps": [
+        "process-lifecycle",
+        "local-security"
+      ],
+      "checks": [
+        {
+          "text": "运行服务可自动生成 PNG 封面",
+          "done": true
+        },
+        {
+          "text": "截图只允许 loopback HTTP/HTTPS",
+          "done": true
+        },
+        {
+          "text": "非本机子资源和重定向被拦截",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-006"
+      ],
+      "status": "done",
+      "description": "使用独立 Chrome/Edge/Chromium 会话截图，不复用日常浏览器登录态；无浏览器或非网页服务会显示可重试错误。",
+      "evidence": [
+        "internal/cover/cover.go",
+        "internal/cover/cover_test.go",
+        "docs/devhub-v0.1-verification.md"
+      ]
+    },
+    {
+      "id": "launch-normalization",
+      "title": "启动命令自动拆分",
+      "subtitle": "cd / Set-Location / pushd",
+      "stage": "current",
+      "x": 1165,
+      "y": 365,
+      "deps": [
+        "process-lifecycle"
+      ],
+      "checks": [
+        {
+          "text": "完整命令可拆分为工作目录和启动动作",
+          "done": true
+        },
+        {
+          "text": "兼容引号目录后漏写分隔符",
+          "done": true
+        },
+        {
+          "text": "不存在、相对或条件回退路径不会被改写",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-008"
+      ],
+      "status": "done",
+      "description": "保存时只转换确实存在的绝对目录，降低复制终端命令时的配置门槛，同时避免猜测不明确的 shell 语义。",
+      "evidence": [
+        "internal/launchcmd/normalize.go",
+        "internal/launchcmd/normalize_test.go"
+      ]
+    },
+    {
+      "id": "settings-i18n",
+      "title": "设置与中英文",
+      "subtitle": "语言 · 扫描开关 · 动态间隔",
+      "stage": "maturity",
+      "x": 45,
+      "y": 770,
+      "deps": [
+        "persistence",
+        "service-discovery"
+      ],
+      "checks": [
+        {
+          "text": "中英文文案由统一资源管理并即时切换",
+          "done": true
+        },
+        {
+          "text": "自动扫描可启停并设置安全范围内的间隔",
+          "done": true
+        },
+        {
+          "text": "设置保存到 SQLite 并在重启后恢复",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-009",
+        "AC-010"
+      ],
+      "status": "done",
+      "description": "设置面板已支持中英文即时切换、自动发现开关和 5–300 秒动态间隔；偏好保存到 SQLite 并在重启后恢复。",
+      "evidence": [
+        "web/src/i18n.ts",
+        "web/src/App.tsx",
+        "internal/model/settings.go",
+        "internal/store/store.go",
+        "internal/server/server.go",
+        "docs/devhub-v0.2-settings.md"
+      ]
+    },
+    {
+      "id": "health-and-log-quality",
+      "title": "健康状态与日志质量",
+      "subtitle": "进程 / TCP / HTTP · 编码清理",
+      "stage": "maturity",
+      "x": 325,
+      "y": 770,
+      "deps": [
+        "status-and-logs"
+      ],
+      "checks": [
+        {
+          "text": "分别显示进程、端口和 HTTP 健康",
+          "done": true
+        },
+        {
+          "text": "启动超时与失败原因直接显示在卡片",
+          "done": true
+        },
+        {
+          "text": "PowerShell CLIXML、乱码和 ANSI 输出可读",
+          "done": true
+        },
+        {
+          "text": "日志支持搜索、暂停、清空和导出",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-011",
+        "AC-012"
+      ],
+      "status": "done",
+      "description": "把“进程存在”和“服务可用”分开表达；启动超时和快速退出会显示在卡片上并可重试。",
+      "evidence": [
+        "internal/server/server.go",
+        "internal/model/service.go",
+        "internal/logfmt/clean.go",
+        "internal/runner/runner.go",
+        "docs/devhub-v0.2-health-logs.md"
+      ]
+    },
+    {
+      "id": "discovery-controls",
+      "title": "可控自动发现",
+      "subtitle": "包含/排除 · 合并端口 · 主网页",
+      "stage": "maturity",
+      "x": 605,
+      "y": 770,
+      "deps": [
+        "service-discovery",
+        "settings-i18n"
+      ],
+      "checks": [
+        {
+          "text": "用户可配置包含与排除目录、进程和端口",
+          "done": true
+        },
+        {
+          "text": "同一进程多个端口可合并并选择主网页",
+          "done": true
+        },
+        {
+          "text": "规则命中原因可解释且可恢复",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-013"
+      ],
+      "status": "done",
+      "description": "用户可配置包含/排除目录、进程和端口；同一进程多端口合并并说明命中原因；规则不会删除手动服务。",
+      "evidence": [
+        "internal/discovery/filter.go",
+        "internal/discovery/discovery.go",
+        "internal/server/server.go",
+        "web/src/App.tsx",
+        "docs/devhub-v0.2-discovery-controls.md"
+      ]
+    },
+    {
+      "id": "configuration-portability",
+      "title": "配置迁移与备份",
+      "subtitle": "数据库迁移 · 导入导出 · 脱敏",
+      "stage": "maturity",
+      "x": 885,
+      "y": 770,
+      "deps": [
+        "persistence",
+        "settings-i18n"
+      ],
+      "checks": [
+        {
+          "text": "SQLite schema 具有版本迁移和回滚测试",
+          "done": true
+        },
+        {
+          "text": "服务配置可导入、导出和备份",
+          "done": true
+        },
+        {
+          "text": "敏感环境变量默认隐藏并可从导出中剔除",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-014"
+      ],
+      "status": "done",
+      "description": "升级不能破坏已有服务；分享配置时必须避免意外带出密钥、日志或私人路径。",
+      "evidence": [
+        "internal/store/migrate.go",
+        "internal/store/export.go",
+        "internal/server/server.go",
+        "docs/devhub-v0.2-portability.md"
+      ]
+    },
+    {
+      "id": "personalized-ui",
+      "title": "个性化控制室 UI",
+      "subtitle": "主题 · 密度 · 卡片/列表 · 键盘",
+      "stage": "maturity",
+      "x": 1165,
+      "y": 770,
+      "deps": [
+        "settings-i18n"
+      ],
+      "checks": [
+        {
+          "text": "主题、强调色与界面密度可设置并持久化",
+          "done": true
+        },
+        {
+          "text": "服务支持封面卡片和紧凑列表视图",
+          "done": true
+        },
+        {
+          "text": "项目颜色、图标和排序可定制",
+          "done": true
+        },
+        {
+          "text": "键盘操作、焦点与响应式布局完成验收",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-015"
+      ],
+      "status": "done",
+      "description": "个性化围绕高频管理效率展开，不只更换颜色；服务很多时仍应快速定位和操作。",
+      "evidence": [
+        "web/src/App.tsx",
+        "web/src/style.css",
+        "internal/model/settings.go",
+        "docs/devhub-v0.2-personalized-ui.md"
+      ]
+    },
+    {
+      "id": "cross-platform-runtime",
+      "title": "三平台运行证据",
+      "subtitle": "Windows · macOS · Linux",
+      "stage": "release",
+      "x": 235,
+      "y": 1190,
+      "deps": [
+        "health-and-log-quality",
+        "discovery-controls"
+      ],
+      "checks": [
+        {
+          "text": "Windows 真实生命周期与截图回归通过",
+          "done": true
+        },
+        {
+          "text": "macOS 真实发现、进程组和截图回归通过",
+          "done": false
+        },
+        {
+          "text": "Linux 真实发现、进程组和截图回归通过",
+          "done": false
+        },
+        {
+          "text": "WSL、容器与权限受限情形有明确边界",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-016"
+      ],
+      "status": "blocked",
+      "blocker": "Linux WSL 已验证发现/启停/日志但无截图；本机没有 macOS，不能完成三平台运行验收。",
+      "description": "Windows 有完整运行证据；Linux WSL 验证了发现、进程组和日志；macOS 与 Linux 截图仍缺。",
+      "evidence": [
+        "docs/devhub-cross-platform.md",
+        "docs/devhub-v0.1-verification.md"
+      ]
+    },
+    {
+      "id": "distribution",
+      "title": "安装、升级与发布",
+      "subtitle": "Release · 安装包 · SBOM · 签名",
+      "stage": "release",
+      "x": 615,
+      "y": 1190,
+      "deps": [
+        "configuration-portability",
+        "cross-platform-runtime"
+      ],
+      "checks": [
+        {
+          "text": "GitHub Release 自动生成三平台制品与校验和",
+          "done": false
+        },
+        {
+          "text": "Windows 安装/卸载及升级路径通过验证",
+          "done": true
+        },
+        {
+          "text": "依赖更新、许可证、CodeQL 与 SBOM 接入",
+          "done": false
+        },
+        {
+          "text": "可执行文件签名策略明确并执行",
+          "done": true
+        }
+      ],
+      "ac": [
+        "AC-017"
+      ],
+      "status": "blocked",
+      "blocker": "仓库没有 git 提交和 GitHub 远端，无法产生真实 Release；没有发布者证书做 Authenticode。Windows 安装/卸载和 SHA-256 校验和已在本机执行。",
+      "description": "安装脚本、SBOM、校验和与 Release 工作流已就绪；仍缺 GitHub Release 和代码签名证书。",
+      "evidence": [
+        "scripts/install.ps1",
+        "scripts/uninstall.ps1",
+        "scripts/sbom.mjs",
+        ".github/workflows/release.yml",
+        "docs/devhub-distribution.md",
+        "SECURITY.md"
+      ]
+    },
+    {
+      "id": "mature-release-gate",
+      "title": "成熟版本发布门禁",
+      "subtitle": "回归 · 升级 · 文档 · 独立验收",
+      "stage": "release",
+      "x": 995,
+      "y": 1190,
+      "deps": [
+        "personalized-ui",
+        "distribution"
+      ],
+      "checks": [
+        {
+          "text": "全部必需 AC 取得对应平台证据",
+          "done": false
+        },
+        {
+          "text": "旧数据库升级、失败恢复和卸载不丢项目文件",
+          "done": false
+        },
+        {
+          "text": "README、SECURITY、CHANGELOG 与维护政策同步",
+          "done": false
+        },
+        {
+          "text": "发布候选由开发实现之外的验收过程检查",
+          "done": false
+        }
+      ],
+      "ac": [
+        "AC-018"
+      ],
+      "status": "blocked",
+      "blocker": "依赖三平台运行证据和 GitHub Release，二者都未完成，不能做成熟版本发布门禁。",
+      "description": "开发节点完成比例不能替代发布验收；只有制品、升级和真实平台证据齐备后才能发布成熟版本。",
+      "evidence": [
+        "CHANGELOG.md",
+        "docs/roadmap-acceptance.md"
+      ]
+    },
+    {
+      "id": "project-orchestration",
+      "title": "项目级编排",
+      "subtitle": "依赖顺序 · 一键启停 · 配置档",
+      "stage": "future",
+      "x": 300,
+      "y": 1545,
+      "deps": [
+        "mature-release-gate"
+      ],
+      "checks": [
+        {
+          "text": "成熟版本发布后重新评估服务依赖和批量操作",
+          "done": false
+        }
+      ],
+      "ac": [],
+      "status": "future",
+      "description": "允许项目声明数据库、后端、前端的启动顺序以及开发、测试、Mock 等配置档。",
+      "evidence": []
+    },
+    {
+      "id": "runtime-ecosystem",
+      "title": "开发运行时生态",
+      "subtitle": "WSL · Docker Compose · 托盘通知",
+      "stage": "future",
+      "x": 770,
+      "y": 1545,
+      "deps": [
+        "mature-release-gate"
+      ],
+      "checks": [
+        {
+          "text": "根据真实用户需求选择首批外部运行时集成",
+          "done": false
+        }
+      ],
+      "ac": [],
+      "status": "future",
+      "description": "候选包括 WSL、Docker Compose、系统托盘、开机启动和桌面通知；不在 v0.2 必需范围内。",
+      "evidence": []
+    }
+  ],
+  "activity": [
+    {
+      "date": "2026-09-14T08:58:00.000Z",
+      "title": "配置迁移与备份：done",
+      "text": "完成 schema 迁移、导出导入备份和密钥剔除；Windows 隔离实例验证非法导入不改原库。"
+    },
+    {
+      "date": "2026-09-14T08:58:00.000Z",
+      "title": "个性化控制室 UI：done",
+      "text": "主题、强调色、密度、卡片/列表、项目外观和键盘快捷键已持久化并在 4782 上读回。"
+    },
+    {
+      "date": "2026-09-14T08:58:00.000Z",
+      "title": "三平台运行证据：blocked",
+      "text": "Windows 完整；Linux WSL 验证发现/启停/日志但无截图；没有 macOS 机器。"
+    },
+    {
+      "date": "2026-09-14T08:58:00.000Z",
+      "title": "安装、升级与发布：blocked",
+      "text": "本机安装/卸载和 SHA-256/SBOM 已执行；无 GitHub 远端和代码签名证书，不能宣称 Release 完成。"
+    },
+    {
+      "date": "2026-09-14T08:35:58.906Z",
+      "title": "健康状态与日志质量：done",
+      "text": "Windows 隔离实例完成 AC-011/012：三类健康探针可区分；启动超时和快速退出显示在卡片并可重试；ANSI/CLIXML/中文日志可读可搜索。"
+    },
+    {
+      "date": "2026-09-14T08:35:58.906Z",
+      "title": "可控自动发现：done",
+      "text": "Windows 隔离实例完成 AC-013：同一 node.exe 双端口合并为一条服务；排除端口和目录后扫描结果跟随设置；手动服务保留。"
+    },
+    {
+      "date": "2026-09-14T08:12:48.090Z",
+      "title": "可控自动发现：active",
+      "text": "完成可控发现第一版：设置可配置包含/排除目录、进程和端口；同一进程多端口合并并可选择主网页；卡片显示命中原因；排除规则不会删除手动服务。AC-013 等待工作台真实验收。"
+    },
+    {
+      "date": "2026-09-14T07:36:06.408Z",
+      "title": "健康状态与日志质量：active",
+      "text": "完成健康探针和日志质量第一版：卡片独立显示进程、TCP、HTTP，日志支持清洗、搜索、暂停、复制、导出和清空；AC-011/012 等待真实失败场景正式验收。"
+    },
+    {
+      "date": "2026-09-14T06:55:00Z",
+      "title": "DevHub 交互式路线图接入",
+      "text": "基于 README、SECURITY、源码、测试与 Windows 实际验证建立路线图；v0.2 纳入中英文、扫描设置、健康日志、可控发现、配置迁移和个性化 UI。"
+    },
+    {
+      "date": "2026-09-14T06:40:00Z",
+      "title": "自动发现和启动命令修正",
+      "text": "排除 QQ NT 等系统应用目录的内部监听，并增加完整启动命令的安全自动拆分。"
+    },
+    {
+      "date": "2026-09-14T07:18:00Z",
+      "title": "v0.2 设置与扫描控制完成",
+      "text": "增加中英文资源、SQLite 偏好、自动发现开关和 5–300 秒动态扫描间隔；完成浏览器与 API 边界验证。"
+    }
+  ]
+}
