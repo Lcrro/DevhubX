@@ -93,8 +93,11 @@ func TestServiceExcludedKeepsManual(t *testing.T) {
 }
 
 func TestProcessNameNormalization(t *testing.T) {
-	if !matchProcess("C:\\Windows\\System32\\node.exe", []string{"NODE"}) {
+	if !matchProcess("node.exe", []string{"NODE"}) {
 		t.Fatal("process name should match without extension and case")
+	}
+	if !matchProcess(filepath.Join("usr", "bin", "node"), []string{"node"}) {
+		t.Fatal("unix process path was not matched by basename")
 	}
 	if matchProcess("python", []string{"node"}) {
 		t.Fatal("unrelated process matched")
