@@ -39,11 +39,11 @@ it("loads real state and searches service cards", async () => {
   expect(
     await screen.findByRole("heading", { name: "My frontend" }),
   ).toBeInTheDocument();
-  fireEvent.change(screen.getByRole("textbox", { name: "搜索服务" }), {
+  fireEvent.change(screen.getByRole("textbox", { name: "Search services" }), {
     target: { value: "not-found" },
   });
   await waitFor(() =>
-    expect(screen.getByText("没有匹配的服务")).toBeInTheDocument(),
+    expect(screen.getByText("No matching services")).toBeInTheDocument(),
   );
   expect(
     screen.queryByRole("heading", { name: "My frontend" }),

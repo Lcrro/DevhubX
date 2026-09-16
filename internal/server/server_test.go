@@ -105,7 +105,7 @@ func TestSettingsAPI(t *testing.T) {
 		h.ServeHTTP(w, req)
 		return w
 	}
-	if w := request("GET", "/api/settings", nil); w.Code != 200 || !bytes.Contains(w.Body.Bytes(), []byte(`"language":"zh"`)) {
+	if w := request("GET", "/api/settings", nil); w.Code != 200 || !bytes.Contains(w.Body.Bytes(), []byte(`"language":"en"`)) {
 		t.Fatalf("default settings: %d %s", w.Code, w.Body.String())
 	}
 	w := request("PUT", "/api/settings", model.Settings{Language: "en", AutoScan: false, ScanIntervalSeconds: 30})

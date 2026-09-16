@@ -42,7 +42,7 @@ const (
 
 func DefaultSettings() Settings {
 	return Settings{
-		Language:            "zh",
+		Language:            "en",
 		AutoScan:            true,
 		ScanIntervalSeconds: 10,
 		IncludeDirectories:  []string{},

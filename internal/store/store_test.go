@@ -59,7 +59,7 @@ func TestSettingsPersistenceAndNormalization(t *testing.T) {
 		t.Fatal(err)
 	}
 	got, err := s.LoadSettings()
-	if err != nil || got.Language != "zh" || !got.AutoScan || got.ScanIntervalSeconds != 10 {
+	if err != nil || got.Language != "en" || !got.AutoScan || got.ScanIntervalSeconds != 10 {
 		t.Fatalf("defaults: %+v %v", got, err)
 	}
 	if err := s.SaveSettings(model.Settings{

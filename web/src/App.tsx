@@ -58,7 +58,7 @@ import { createTranslator } from "./i18n";
 
 const errorText = (e: unknown) => (e instanceof Error ? e.message : String(e));
 const defaultSettings: Settings = {
-  language: "zh",
+  language: "en",
   autoScan: true,
   scanIntervalSeconds: 10,
   minScanIntervalSeconds: 5,
